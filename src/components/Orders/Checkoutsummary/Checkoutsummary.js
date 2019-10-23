@@ -2,27 +2,42 @@ import React from 'react'
 import BurgerBuilder from '../../../contaniers/BurgerContainer/BurgerBuilder'
 import './Checkoutsummary.css'
 import Toolbar from '../../Navigation/Toolbar/Toolbar'
+import {connect} from 'react-redux'
 
 
 
-const checkout = (props) =>  {
+
+const checkoutsummary = (props) =>  {
       
     
         return (
-         <React.Fragment>
-             <Toolbar   drawer={props.drawer} 
-                        handleDrawer={props.handleDrawerState} />
+<React.Fragment>
+<Toolbar  drawer={props.drawer} 
+          handleDrawerState={props.handleDrawerState} />
+
                <div className='Checkoutsummary'style={{textAlign:'center'}}>
                <h1>Your tasty hambruger!</h1>
-           <BurgerBuilder ingredients={props.ingredients}/>
-         <div>  {parseFloat(props.price).toFixed(2)}$ </div>
-        <button className='Button' onClick={() => props.checkoutCancel()}>Cancel</button>
-        <button className='Button'  onClick={()=>props.checkoutContinue()}>Continue</button>
-          </div>
+
+        <BurgerBuilder ingredients={props.ingredients}/>
+
+        <div>  {parseFloat(props.price).toFixed(2)}$ </div>
+            <button className='Button' onClick={() => props.checkoutCancel()}>Cancel</button>
+            <button className='Button'  onClick={()=>props.checkoutContinue()}>Continue</button>
+        </div>
 </React.Fragment> 
       )
 
         }
+        
+        
+const mapStateToProps = state => {    
+                return{ 
+                    drawer: state.drawer
+                }  }
+            
 
+const mapDispatchToProps = dispatch =>({
+handleDrawerState: () => dispatch({type: 'HANDLE_DRAWER'})
+                })
 
-export default checkout
+export default connect(mapStateToProps, mapDispatchToProps) (checkoutsummary)

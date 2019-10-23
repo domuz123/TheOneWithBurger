@@ -10,9 +10,9 @@ const toolbar = (props) => (
 
             <div className='Toolbar'>
             <BackDrop drawer={props.drawer} 
-                      clicked={props.handleDrawer}/>
+                      clicked={props.handleDrawerState}/>
             <div className='DrawerToggle' 
-                 onClick={props.handleDrawer}> 
+                 onClick={() => props.handleDrawerState()}> 
             <div>
               </div>
               <div>

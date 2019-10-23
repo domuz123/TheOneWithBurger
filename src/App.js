@@ -11,7 +11,7 @@ class App extends Component {
       <BrowserRouter> 
         
       <Route path='/' exact component = {Burger}/>
-      <Route path='/checkout' component={Checkout}/>
+      <Route path='/checkout'  render={(props) => <Checkout {...props} /> } />
 
      </BrowserRouter>
 

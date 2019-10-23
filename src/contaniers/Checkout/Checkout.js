@@ -40,10 +40,11 @@ this.props.history.replace('checkout/contact-data')
    { return (
         <div>
              
-             <Checkoutsummary ingredients={this.state.ingredients}
-               price={this.state.totalPrice}
+             <Checkoutsummary ingredients={this.state.ingredients} 
+                              price={this.state.totalPrice}
               checkoutCancel={this.checkoutCancelledHandler}
-              checkoutContinue={this.checkoutContinuedHandler}/>
+              checkoutContinue={this.checkoutContinuedHandler}
+             />
               <Route path={this.props.match.path + '/contact-data'}
                       component={Contactdata} />
         </div>
