@@ -13,14 +13,13 @@
     z-index: 90;
 }
 
-.Navitems li { padding:3px}
-
 .NavigationItem {
     margin: 10px 0;
     box-sizing: border-box;
     display: block;
     width:100%;
     list-style: none;
+    padding: 0
 }
 
 .NavigationItem li a {
@@ -32,13 +31,6 @@
   
     }
 
-    .NavigationItem a:hover,
-    .NavigationItem a:active,
-    .NavigationItem a.active {
-    
-       color: #FFA07A
-
-    }
 
     @media(min-width: 500px) {
 
@@ -62,13 +54,10 @@
             display: block;
             }
         
-            .NavigationItem li:hover,
-            .NavigationItem li:active,
-            .NavigationItem li.active {
+            .NavigationItem a:hover,
+            .NavigationItem a:active,
+            .NavigationItem a.active {
                 background-color: #8f5c2c;
                 border-bottom: 4px solid	#FFA07A;
-                color:#FFA07A;
-             
-        
             }
     }

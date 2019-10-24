@@ -189,7 +189,7 @@ render () {
            touched={formElement.config.touched}/>
     )
     )}
-    <button className= 'OrderDataButton' clicked={this.handleOrder} disabled={!this.state.formIsValid}> Order</button>
+    <button className='OrderDataButton' clicked={this.handleOrder} disabled={!this.state.formIsValid}> Order</button>
 
 </form>)
 if(this.state.loading) {

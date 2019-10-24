@@ -1,13 +1,14 @@
 import React from 'react';
 import './Navitems.css'
+import  { NavLink } from 'react-router-dom'
 
 
 const navbar = () => (
 
     <div className='Navitems'>
     <ul className='NavigationItem'> 
-    <li > <a href='/'>Burger</a></li>
-    <li > <a href='/'> Checkout</a> </li> </ul>
+    <li> <NavLink  exact activeClassName='active' to='/'>Burger</NavLink></li>
+    <li > <NavLink to='/orders'> Orders </NavLink > </li> </ul>
       
     </div>
 )
