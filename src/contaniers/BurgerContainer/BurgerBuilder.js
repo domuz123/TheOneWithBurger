@@ -1,13 +1,14 @@
 import React from 'react'
 import BurgerIngredient from '../../components/BurgerIngredient/BurgerIngredient'
 import './BurgerBuilder.css'
+import {connect} from 'react-redux'
 
 
 const burgerIngredients = (props) => {
 
-    let selectedIngredients = Object.keys(props.ingredients)
+    let selectedIngredients = Object.keys(props.ing)
     .map(ingKey => {
-        return [...Array(props.ingredients[ingKey])].map((_, index) => {
+        return [...Array(props.ing[ingKey])].map((_, index) => {
             return <BurgerIngredient key={ingKey + index} type={ingKey} />
         })
     }).reduce((arr, el) => {
@@ -27,6 +28,12 @@ return (
 </div>
 )
 }
+const mapStateToProps = state => {
+  
+    return{ 
+        ing: state.ingredients,
+        total: state.totalPrice,
+        drawer: state.drawer
+    }  }
 
-
-export default burgerIngredients
+export default connect(mapStateToProps) (burgerIngredients)

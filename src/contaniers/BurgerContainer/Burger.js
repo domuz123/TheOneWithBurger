@@ -34,56 +34,12 @@ class Burger extends Component {
 
   
 
-    // addIngredientHandler = (type) => {
-    //     const oldState = this.state.ingredients[type]
-    //     const updatedState = oldState + 1
-    //     const updatedIngredients = {...this.state.ingredients}
-    //     updatedIngredients[type] = updatedState
-        
-    //     let newPrice = INGREDIENT_PRICE[type]
-    //     let startingPrice = this.state.totalPrice
-    //     let price = newPrice + startingPrice
-      
-
-    //     this.setState({
-    //        ingredients: updatedIngredients,
-    //        totalPrice: price
-    //     })
-  
-    //     this.handlePurchese(updatedIngredients)
-       
-    //     console.log(price)
-    // }
-
-    // removeIngredientHandler = (type) => {
-    //     const oldState = this.state.ingredients[type]
-    //     if(oldState >= 1) {
-    //     const updatedState = oldState - 1
-    //     const updatedIngredients = {...this.state.ingredients}
-    //     updatedIngredients[type] = updatedState
-        
-    //     let newPrice = INGREDIENT_PRICE[type]
-    //     let startingPrice = this.state.totalPrice
-    //     let price = startingPrice - newPrice
-      
-
-    //     this.setState({
-    //        ingredients: updatedIngredients,
-    //        totalPrice: price
-    //     })
-    //     this.handlePurchese (updatedIngredients)
-    //    }
-      
-      
-    // }>
+   
     handlePurchese = (ing) => {
       
-
         this.setState ({
             purchesed: this.props.ing > 0
         })
-          
-     console.log(this.state.purchesed)
     }
 
   handleShowModal = () => {
@@ -103,40 +59,11 @@ handleDrawerState = () => {
     }) }
 
     handleContinuePurchase = () => {
-        // this.setState({loading: true})
-        // const order ={
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //          name: 'Ivan',
-        //          address: {street: 'Višići', ZIP: '00000'},
-        //          email: 'iva@.com',
-        //     },
-         
-        //     deliveryMethod: 'Fastest'
-        // }
-        // axios.post('/orders.json', order)
-        // .then(response => {this.setState({
-        //     loading: false, purchesable:false
-        // })})
-        // .catch(error =>{this.setState({
-        //     loading: false, purchesable:false
-        // })});
 
-        const queryParams = []
-        for( let i in this.props.ing) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]))
-        }
-        queryParams.push('price=' + this.props.total)
-        const queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-        })       
+      this.props.history.push('/checkout')
     }
 
-  
-    
+
     render() {
    
      const sum = Object.values(this.props.ing)  

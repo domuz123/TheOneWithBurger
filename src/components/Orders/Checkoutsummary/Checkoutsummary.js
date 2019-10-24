@@ -8,8 +8,6 @@ import {connect} from 'react-redux'
 
 
 const checkoutsummary = (props) =>  {
-      
-    
         return (
 <React.Fragment>
 <Toolbar  drawer={props.drawer} 
@@ -18,10 +16,10 @@ const checkoutsummary = (props) =>  {
                <div className='Checkoutsummary'style={{textAlign:'center'}}>
                <h1>Your tasty hambruger!</h1>
 
-        <BurgerBuilder ingredients={props.ingredients}/>
+        <BurgerBuilder ingredients={props.ing}/>
 
-        <div>  {parseFloat(props.price).toFixed(2)}$ </div>
-            <button className='Button' onClick={() => props.checkoutCancel()}>Cancel</button>
+        <div> {parseFloat(props.total).toFixed(2)}$ </div>
+            <button className='Button' onClick={()=>props.checkoutCancel()}>Cancel</button>
             <button className='Button'  onClick={()=>props.checkoutContinue()}>Continue</button>
         </div>
 </React.Fragment> 
@@ -32,9 +30,10 @@ const checkoutsummary = (props) =>  {
         
 const mapStateToProps = state => {    
                 return{ 
+                    ing: state.ingredients,
+                    total: state.totalPrice,
                     drawer: state.drawer
-                }  }
-            
+                }  }    
 
 const mapDispatchToProps = dispatch =>({
 handleDrawerState: () => dispatch({type: 'HANDLE_DRAWER'})
