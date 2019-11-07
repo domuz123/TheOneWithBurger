@@ -1,4 +1,4 @@
-import React,  {Component} from 'react';
+import React,{Component} from 'react';
 import Burger from '../src/contaniers/BurgerContainer/Burger'
 import Checkout from '../src/contaniers/Checkout/Checkout'
 import {BrowserRouter, Route} from 'react-router-dom'

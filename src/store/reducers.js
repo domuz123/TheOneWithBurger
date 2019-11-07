@@ -1,15 +1,10 @@
-const initialState = {
-    ingredients: {
-        ketchup: 0,
-        mayonnaise: 0,
-        salad: 0,
-        meat: 0,
-        cheese: 0,
-        bacon: 0,
-    },
+import * as actionTypes from './actionTypes'
 
-    totalPrice: 1,
-    drawer: false
+const initialState = {
+    ingredients: null,
+    totalPrice: 3,
+    drawer: false,
+    error: false
 }
 
 const INGREDIENT_PRICE = {
@@ -23,7 +18,7 @@ const reducer = (state = initialState, action) => {
 
 switch(action.type){
 
-    case 'ADD_INGREDIENT':
+    case actionTypes.ADD_INGREDIENT:
     return {
         ...state,
         ingredients: {
@@ -34,7 +29,7 @@ switch(action.type){
         totalPrice: state.totalPrice + INGREDIENT_PRICE[action.ingredientName]
 
     }
-    case 'REMOVE_INGREDIENT':
+    case  actionTypes.REMOVE_INGREDIENT:
     return {
         ...state,
         ingredients: {
@@ -44,11 +39,25 @@ switch(action.type){
         totalPrice: state.totalPrice - INGREDIENT_PRICE[action.ingredientName]
 
 }
-case 'HANDLE_DRAWER':
+case actionTypes.HANDLE_DRAWER:
 return {
     ...state,
     drawer: !state.drawer
 }
+
+case actionTypes.INIT_INGREDIENTS:
+return {
+    ...state,
+    ingredients: action.ingredients,
+    error:false, 
+    totalPrice: 3
+}
+
+case actionTypes.FETCH_ERROR:
+    return {
+        ...state,
+        error: true
+    }
 
 default:return state
 } }

@@ -11,7 +11,7 @@ const ingredientsSummary = (props) => {
          </li> 
     
   })
-  console.log(ingredientsList)
+ 
 
  return (<div className='Ingredients'>
    

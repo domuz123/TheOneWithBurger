@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 const burgerIngredients = (props) => {
 
-    let selectedIngredients = Object.keys(props.ing)
+    let selectedIngredients = Object.keys(props.ingredients)
     .map(ingKey => {
         return [...Array(props.ing[ingKey])].map((_, index) => {
             return <BurgerIngredient key={ingKey + index} type={ingKey} />

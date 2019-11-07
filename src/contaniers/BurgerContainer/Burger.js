@@ -8,6 +8,7 @@ import axios from '../../axios-orders'
 import Spinner from '../../components/Spinner/Spinner'
 import errorHandler from '../../components/errorHandler/errorHandler'
 import {connect} from 'react-redux'
+import * as action from '../../store/index'
 
 
 class Burger extends Component {
@@ -17,22 +18,12 @@ class Burger extends Component {
         purshesable: false,
         drawer: false,
         loading: false,
-        error: false
+    
     }
 
     componentDidMount (){
-        // axios.get('https://burgerreplic.firebaseio.com/Ingredients.json')
-        // .then(response => this.setState({
-        //     ingredients: response.data
-        // }))
-        // .catch(error => {
-        //     this.setState({
-        //         error: true
-        //     })
-        // } )
+       this.props.fetchIngredients()
     }
-
-  
 
    
     handlePurchese = (ing) => {
@@ -65,20 +56,19 @@ handleDrawerState = () => {
 
 
     render() {
-   
-     const sum = Object.values(this.props.ing)  
-        .map(ingKey => {
-            return ingKey
-        } ).reduce((sum, el ) => {
-            return sum + el
-        }, 0)
-console.log(sum)
-
+//      const sum = Object.values(this.props.ing)  
+//         .map(ingKey => {
+//             return ingKey
+//         } ).reduce((sum, el ) => {
+//             return sum + el
+//         }, 0)
+// console.log(sum)
+      console.log(this.props.ing)
      let disabledLess = {...this.props.ing}
      for(let key in disabledLess) { disabledLess[key] = disabledLess[key] <= 0}
 
     let orderSummary = null;
-    let burgerBuilder = this.state.error ? <p>Ingredients can't load</p> : <Spinner />
+    let burgerBuilder = this.props.error ? <p>Ingredients can't load</p> : <Spinner />
     if(this.props.ing) {
       burgerBuilder =  (
       <div>
@@ -86,7 +76,7 @@ console.log(sum)
      <BurgerControls  total={this.props.total}
       added={this.props.addIngredientHandler}
       removed={this.props.removeIngredientHandler}
-      purchesed = {sum}
+      purchesed = {this.props.total > 3}
       disabled = {disabledLess}
       showModal = {this.handleShowModal}  
       /> 
@@ -124,17 +114,18 @@ console.log(sum)
     }
 }
 const mapStateToProps = state => {
-    console.log(state.ingredients)
     return{ 
         ing: state.ingredients,
         total: state.totalPrice,
-        drawer: state.drawer
+        drawer: state.drawer,
+        error: state.error
     }  }
 
 const mapDispatchToProps = dispatch =>({
-addIngredientHandler: (ingName) => dispatch({type: 'ADD_INGREDIENT', ingredientName: ingName}),
-removeIngredientHandler: (ingName) => dispatch({type: 'REMOVE_INGREDIENT', ingredientName: ingName}),
-handleDrawerState: () => dispatch({type: 'HANDLE_DRAWER'}),
+addIngredientHandler: (ingName) => dispatch(action.addIngredient(ingName)),
+removeIngredientHandler: (ingName) => dispatch(action.removeIngredient(ingName)),
+handleDrawerState: () => dispatch(action.handleDrawerState()),
+fetchIngredients: () => dispatch(action.fetchIngredients())
 })
 
 
