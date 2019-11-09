@@ -24,7 +24,7 @@ switch(props.elementType) {
     (<select className='InputElement' 
     {...props.elementConfig} value={props.value} >
     {props.elementConfig.options.map( option => (
-        <option value={option.value} onChange={props.changed}>
+        <option key={option.value} value={option.value} onChange={props.changed}>
         {option.displayValue}  </option>
     )
 

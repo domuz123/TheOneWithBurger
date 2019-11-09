@@ -4,6 +4,7 @@ import Spinner from '../../components/Spinner/Spinner'
 import Input from '../../components/Input/Input'
 import {connect} from 'react-redux'
 import './Contactdata.css'
+import * as action from '../../store/actions/index'
 
 class ContactData extends Component {
 
@@ -94,7 +95,7 @@ class ContactData extends Component {
               }
         },
         formIsValid: false,
-        loading: false
+     
     }
 
 
@@ -125,18 +126,13 @@ class ContactData extends Component {
         for(let formElementIndentifier in this.state.orderForm ) {
             formData[formElementIndentifier] = this.state.orderForm[formElementIndentifier].value
         }
-          this.setState({loading: true})
+  
         const order = {
             ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
         }
-          axios.post('/orders.json', order)
-          .then(response => {
-            this.setState({loading:false})
-            this.props.history.push('/')}
-            )
-          .catch(error =>this.setState({loading:false, }))
+      this.props.orderBurger(order)
     }
 
     inputChangeHandler = (event, inputIndentifier) => {
@@ -182,17 +178,17 @@ render () {
     <Input key={formElement.id}
            elementType= {formElement.config.elementType}
            elementConfig= {formElement.config.elementConfig}
-           value= {formElement.config.value}
+           defaultValue= {formElement.config.value}
            changed={(event) => this.inputChangeHandler(event, formElement.id)}
            invalid={!formElement.config.valid}
            shouldValidate={formElement.config.validation}
            touched={formElement.config.touched}/>
     )
     )}
-    <button className='OrderDataButton' clicked={this.handleOrder} disabled={!this.state.formIsValid}> Order</button>
+    <button className='OrderDataButton' onClick={this.handleOrder} disabled={!this.state.formIsValid}> Order</button>
 
 </form>)
-if(this.state.loading) {
+if(this.props.loading) {
     form = <Spinner />
 }
 
@@ -213,9 +209,15 @@ if(this.state.loading) {
 
 const mapeStateToProps = state => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice
+        ings: state.BurgerReducer.ingredients,
+        price: state.BurgerReducer.totalPrice,
+        loading: state.OrderReducer.loading
     }
 }
+const mapDispatchToProps = dispatch =>{
+    return {
+    orderBurger : (orderData) => dispatch(action.purchaseBurger(orderData))}
 
-export default connect(mapeStateToProps) (ContactData)
+    }
+
+export default connect(mapeStateToProps,mapDispatchToProps) (ContactData)

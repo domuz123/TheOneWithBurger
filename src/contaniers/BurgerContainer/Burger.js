@@ -8,7 +8,7 @@ import axios from '../../axios-orders'
 import Spinner from '../../components/Spinner/Spinner'
 import errorHandler from '../../components/errorHandler/errorHandler'
 import {connect} from 'react-redux'
-import * as action from '../../store/index'
+import * as action from '../../store/actions/index'
 
 
 class Burger extends Component {
@@ -27,7 +27,6 @@ class Burger extends Component {
 
    
     handlePurchese = (ing) => {
-      
         this.setState ({
             purchesed: this.props.ing > 0
         })
@@ -52,6 +51,7 @@ handleDrawerState = () => {
     handleContinuePurchase = () => {
 
       this.props.history.push('/checkout')
+   
     }
 
 
@@ -115,17 +115,19 @@ handleDrawerState = () => {
 }
 const mapStateToProps = state => {
     return{ 
-        ing: state.ingredients,
-        total: state.totalPrice,
-        drawer: state.drawer,
-        error: state.error
+        ing: state.BurgerReducer.ingredients,
+        total: state.BurgerReducer.totalPrice,
+        drawer: state.BurgerReducer.drawer,
+        error: state.BurgerReducer.error,
+    
     }  }
 
 const mapDispatchToProps = dispatch =>({
 addIngredientHandler: (ingName) => dispatch(action.addIngredient(ingName)),
 removeIngredientHandler: (ingName) => dispatch(action.removeIngredient(ingName)),
 handleDrawerState: () => dispatch(action.handleDrawerState()),
-fetchIngredients: () => dispatch(action.fetchIngredients())
+fetchIngredients: () => dispatch(action.fetchIngredients()),
+purchaseInit: () => dispatch(action.purchaseInit())
 })
 
 

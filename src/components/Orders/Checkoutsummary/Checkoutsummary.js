@@ -30,9 +30,9 @@ const checkoutsummary = (props) =>  {
         
 const mapStateToProps = state => {    
                 return{ 
-                    ing: state.ingredients,
-                    total: state.totalPrice,
-                    drawer: state.drawer
+                    ing: state.BurgerReducer.ingredients,
+                    total: state.BurgerReducer.totalPrice,
+                    drawer: state.BurgerReducer.drawer
                 }  }    
 
 const mapDispatchToProps = dispatch =>({
